@@ -12,5 +12,7 @@ namespace Business.Constants
         public static string BookList = "Kitaplar Listelendi";
         public static string StudentAdded = "Öğrenci eklendi";
         public static string StudentDeleted = "Öğrenci silindi";
+        public static string CheckIfBookType = "1 türden en fazla 10 kitap olabilir";
+        public static string CheckIfTypeNameExist = "Tür ismi aynı olamaz";
     }
 }

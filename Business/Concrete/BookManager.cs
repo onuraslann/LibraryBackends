@@ -2,6 +2,7 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -23,6 +24,11 @@ namespace Business.Concrete
         [ValidationAspect(typeof(BookValidator))]
         public IResult Add(Book book)
         {
+            IResult result = BusinessRules.Run(CheckIfBookTypeCount(book.BookTypeId));
+            if (result != null)
+            {
+                return result;
+            }
             _bookDal.Add(book);
             return new SucessResult(Messages.BookAdded);
         }
@@ -40,6 +46,15 @@ namespace Business.Concrete
         public IDataResult<List<Book>> GetByType(int type)
         {
             return new SuccessDataResult<List<Book>>(_bookDal.GetAll(x => x.BookTypeId ==type));
+        }
+        private IResult CheckIfBookTypeCount(int booktype)
+        {
+            var result = _bookDal.GetAll(x => x.BookTypeId == booktype).Count;
+            if (result > 10)
+            {
+                return new ErrorResult(Messages.CheckIfBookType);
+            }
+            return new SucessResult();
         }
     }
 }
