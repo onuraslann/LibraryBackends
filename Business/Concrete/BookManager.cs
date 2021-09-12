@@ -1,5 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Validation;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -18,6 +20,7 @@ namespace Business.Concrete
             _bookDal = bookDal;
         }
 
+        [ValidationAspect(typeof(BookValidator))]
         public IResult Add(Book book)
         {
             _bookDal.Add(book);
