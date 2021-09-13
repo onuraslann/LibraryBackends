@@ -28,7 +28,7 @@ namespace Business.Concrete
                 return result;
             }
             _operationDal.Add(operation);
-            return new SucessResult();
+            return new SuccessResult();
         }
 
         public IDataResult<List<Operation>> GetAll()
@@ -47,7 +47,7 @@ namespace Business.Concrete
             {
                 return new ErrorResult();
             }
-            return new SucessResult();
+            return new SuccessResult();
         }
     }
 }

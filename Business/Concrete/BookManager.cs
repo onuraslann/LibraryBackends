@@ -6,6 +6,7 @@ using Core.Utilities.Business;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -30,12 +31,17 @@ namespace Business.Concrete
                 return result;
             }
             _bookDal.Add(book);
-            return new SucessResult(Messages.BookAdded);
+            return new SuccessResult(Messages.BookAdded);
         }
 
         public IDataResult<List<Book>> GetAll()
         {
             return new SuccessDataResult<List<Book>>(_bookDal.GetAll(), Messages.BookList);
+        }
+
+        public IDataResult<List<BookDtoDetails>> GetByDto()
+        {
+            return new SuccessDataResult<List<BookDtoDetails>>(_bookDal.GetByDto(),Messages.BookDto);
         }
 
         public IDataResult<List<Book>> GetByPage(int page)
@@ -54,7 +60,7 @@ namespace Business.Concrete
             {
                 return new ErrorResult(Messages.CheckIfBookType);
             }
-            return new SucessResult();
+            return new SuccessResult();
         }
     }
 }

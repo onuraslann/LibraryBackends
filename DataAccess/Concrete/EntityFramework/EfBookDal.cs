@@ -11,7 +11,7 @@ namespace DataAccess.Concrete.EntityFramework
 {
     public class EfBookDal : EntityRepositoryBase<Book, LibraryContext>, IBookDal
     {
-        public List<BookDtoDetails> GetBtDto()
+        public List<BookDtoDetails> GetByDto()
         {
             using (LibraryContext context = new LibraryContext())
             {

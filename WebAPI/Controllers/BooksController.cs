@@ -53,7 +53,16 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-
+        [HttpGet("dto")]
+        public IActionResult GetByDto()
+        {
+            var result = _bookService.GetByDto();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
     }
 }
 

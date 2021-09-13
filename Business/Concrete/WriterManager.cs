@@ -20,7 +20,7 @@ namespace Business.Concrete
         public IResult Add(Writer writer)
         {
             _writerDal.Add(writer);
-            return new SucessResult();
+            return new SuccessResult();
         }
 
         public IDataResult<List<Writer>> GetAll()

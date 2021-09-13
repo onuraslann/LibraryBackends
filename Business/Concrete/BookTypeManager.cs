@@ -28,13 +28,13 @@ namespace Business.Concrete
                 return result;
             }
             _bookTypeDal.Add(bookType);
-            return new SucessResult(Messages.BookTypeAdded);
+            return new SuccessResult(Messages.BookTypeAdded);
         }
 
         public IResult Delete(BookType bookType)
         {
             _bookTypeDal.Add(bookType);
-            return new SucessResult(Messages.BookTypeDeleted);
+            return new SuccessResult(Messages.BookTypeDeleted);
         }
 
         public IDataResult<List<BookType>> GetAll()
@@ -46,9 +46,9 @@ namespace Business.Concrete
             var result = _bookTypeDal.GetAll(x => x.Type == typeName).Any();
             if (result)
             {
-                return new ErrorResult(Messages.CheckIfTypeNameExist);
+                return new ErrorResult(Messages.ExistName);
             }
-            return new SucessResult();
+            return new SuccessResult();
         
         }
 
