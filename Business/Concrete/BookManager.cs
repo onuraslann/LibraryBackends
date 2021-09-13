@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Validation;
@@ -22,6 +23,7 @@ namespace Business.Concrete
             _bookDal = bookDal;
         }
 
+        [SecuredOperation("admin,editör")]
         [ValidationAspect(typeof(BookValidator))]
         public IResult Add(Book book)
         {
