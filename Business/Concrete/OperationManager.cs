@@ -22,7 +22,7 @@ namespace Business.Concrete
         [ValidationAspect(typeof(OperationValidator))]
         public IResult Add(Operation operation)
         {
-            IResult result = BusinessRules.Run(CheckIfStudentIdCount(operation.StudentId));
+            IResult result = BusinessRules.Run(CheckIfStudentIdCount(operation.StudentId), CheckIfBookIdCount(operation.BookId));
             if (result != null)
             {
                 return result;
@@ -44,6 +44,15 @@ namespace Business.Concrete
         {
             var result = _operationDal.GetAll(x => x.StudentId == studentId).Count;
             if (result > 10)
+            {
+                return new ErrorResult();
+            }
+            return new SuccessResult();
+        }
+        private IResult CheckIfBookIdCount(int bookId)
+        {
+            var result = _operationDal.GetAll(x => x.BookId == bookId).Count;
+            if (result > 15)
             {
                 return new ErrorResult();
             }
