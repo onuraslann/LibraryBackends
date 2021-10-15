@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Core.Aspects.Caching;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -22,7 +23,7 @@ namespace Business.Concrete
             _writerDal.Add(writer);
             return new SuccessResult();
         }
-
+        [CacheAspect]
         public IDataResult<List<Writer>> GetAll()
         {
             return new SuccessDataResult<List<Writer>>(_writerDal.GetAll());

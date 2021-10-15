@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Caching;
 using Core.Aspects.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Result;
@@ -20,6 +21,7 @@ namespace Business.Concrete
             _operationDal = operationDal;
         }
         [ValidationAspect(typeof(OperationValidator))]
+        [CacheRemoveAspect("IOperationService.Get")]
         public IResult Add(Operation operation)
         {
             IResult result = BusinessRules.Run(CheckIfStudentIdCount(operation.StudentId), CheckIfBookIdCount(operation.BookId));

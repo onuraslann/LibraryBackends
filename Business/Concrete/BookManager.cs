@@ -2,6 +2,7 @@
 using Business.BusinessAspects;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Caching;
 using Core.Aspects.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Result;
@@ -25,6 +26,7 @@ namespace Business.Concrete
 
         [SecuredOperation("admin,editör")]
         [ValidationAspect(typeof(BookValidator))]
+        [CacheRemoveAspect("IBookService.Get")]
         public IResult Add(Book book)
         {
             IResult result = BusinessRules.Run(CheckIfBookTypeCount(book.BookTypeId));
@@ -35,7 +37,7 @@ namespace Business.Concrete
             _bookDal.Add(book);
             return new SuccessResult(Messages.BookAdded);
         }
-
+        [CacheAspect]
         public IDataResult<List<Book>> GetAll()
         {
             return new SuccessDataResult<List<Book>>(_bookDal.GetAll(), Messages.BookList);

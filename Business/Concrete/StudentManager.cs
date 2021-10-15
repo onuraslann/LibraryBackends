@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Caching;
 using Core.Aspects.Validation;
 using Core.Utilities.Result;
 using DataAccess.Abstract;
@@ -32,7 +33,7 @@ namespace Business.Concrete
             _studentDal.Delete(student);
             return new SuccessResult(Messages.StudentDeleted);
         }
-
+        [CacheAspect]
         public IDataResult<List<Student>> GetAll()
         {
             return new SuccessDataResult<List<Student>>(_studentDal.GetAll());
